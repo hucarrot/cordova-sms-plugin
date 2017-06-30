@@ -92,9 +92,13 @@ public class Sms extends CordovaPlugin {
             }
         }, new IntentFilter(SENDING_SMS_ID));
 
-        SmsManager sms = SmsManager.getDefault();
-        
-        sms.sendTextMessage(phoneNumber, null, message, sentPI, null);
+        //SmsManager sms = SmsManager.getDefault();
+        //sms.sendTextMessage(phoneNumber, null, message, sentPI, null);
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setType("vnd.android-dir/mms-sms");
+        intent.putExtra("sms_body", message);
+        getActivity().startActivity(intent);
+
     }
     
     private Activity getActivity() {
